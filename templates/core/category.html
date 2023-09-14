@@ -1,0 +1,29 @@
+{% extends 'partials/base.html' %}
+{% block title %} Categories List {% endblock title %}
+
+{% block content %}
+    {% if messages %}
+        {% for message in messages %}
+            {{message}}
+        {% endfor %}
+    {% endif %}
+   
+    <h2>All Categories</h2>
+
+    <div>
+        <h2>{{categories.count}} Categories</h2>
+        <div>
+            {% for category in categories %}
+            <a href="{% url 'category-products' category.cid %}">
+                <div>
+                    <div><img src="{{ category.image.url }}" alt="image" width="100" height="100"></div>
+                    <div>
+                        <small>{{category.title}}</small> <br>
+                        <small>{{category.category.count}} Product{{category.category.count|pluralize}}</small> 
+                    </div>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock content %}

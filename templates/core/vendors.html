@@ -1,0 +1,22 @@
+{% extends 'partials/base.html' %}
+{% block title %} Vendors {% endblock title %}
+
+{% block content %}
+<h2>Vendors</h2>
+<small>{{vendors.count}} Vendor{{vendors.count|pluralize}}</small>
+    <div>
+        {% for vendor in vendors %}
+        <a href="{% url 'vendor-products'  vendor.vid %}">
+            <div><img src="{{vendor.image.url}}" alt="vendor" width="100" height="100"></div>
+            <div>Name: {{vendor.title}}</div>
+            <div>Rating: {{vendor.authentic_rating}}</div>
+            <div>Warranty Period: {{vendor.warranty_period}}</div>
+            <div>Shipping On Time: {{vendor.shipping_on_time}}</div>
+            <div>Conatact: {{vendor.contact}}</div>
+            <div>Address: {{vendor.address}}</div>
+            <div>Since {{vendor.date|date:"M Y"}}</div>
+            <div>{{vendor.vendor.count}} Product{{vendor.vendor.count|pluralize}}</div>
+            {% endfor %}
+        </a>
+    </div>
+{% endblock content %}

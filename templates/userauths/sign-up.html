@@ -1,0 +1,22 @@
+{% extends 'partials/base.html' %}
+{% block title %} Resgistration {% endblock title %}
+
+{% block content %}
+    <h1>Resgistration Page</h1>
+    <div style="color: red;">
+        {% if form.errors %}
+            <small>{{form.errors}}</small>
+        {% endif %}
+    </div>
+    <form action="" method="POST">
+        {% csrf_token %}
+        <label for="">username:</label>{{form.username}} <br>
+        <label for="">Email:</label>{{form.email}} <br>
+        <label for="">Password:</label>{{form.password1}} <br>
+        <label for="">Confirm Password:</label>{{form.password2}} <br>
+        <button type="submit">Register</button>
+    </form>
+    <div>
+        <h5>Already have an account?<a href="{% url 'signin' %}"> Sign-In</a></h5>
+    </div>
+{% endblock content %}

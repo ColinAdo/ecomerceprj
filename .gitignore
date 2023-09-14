@@ -1,0 +1,8 @@
+.vscode/*
+core/__pycache__/*
+core/migrations/*
+ecomerceprj/__pycache__/*
+userauths/__pycache__/*
+userauths/migrations/*
+media/*
+db.sqlite3

@@ -1,0 +1,30 @@
+{% extends 'partials/base.html' %}
+{% block title %} Categories List {% endblock title %}
+
+{% block content %}
+    {% if messages %}
+        {% for message in messages %}
+            {{message}}
+        {% endfor %}
+    {% endif %}
+    
+    <h2>All Categories</h2>
+
+    <div>
+        <div>
+            <h2>{{category.title}}</h2>
+            <small>{{products.count}} Product{{products.count|pluralize}} found</small>
+        </div>
+        <div>
+            {% for product in products %}
+                <div>
+                    <div><img src="{{ product.image.url }}" alt="image" width="100" height="100"></div>
+                    <div>
+                        <small>{{product.title}}</small> <br>
+                        <small>By {{product.vendor.title}}</small>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock content %}
