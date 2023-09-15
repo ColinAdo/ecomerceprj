@@ -16,6 +16,7 @@
                         <small>Mfd: {{product.mfd}}</small> <br>
                         <small>Expaires After: {{product.expair}} days</small> <br>
                         <small>{{product.number_in_stock}} Remained</small> <br>
+                        <small>{{product.description|truncatechars:30}}</small> <br>
                         <small>{{product.price}}</small>
                         <small><del >{{product.old_price}}</del></small>
                         
@@ -26,5 +27,30 @@
         {% for p_image in p_images %}
         <div class="thumbnail"><img src="{{p_image.image.url}}" alt="product-details" width="50" height="50"></div>
         {% endfor %}
+
+        <!-- The full description and specification of the products goes here...... -->
+
+        <h2>Your Address</h2>
+        <div>
+            <small>{{ address.address }}</small><br>
+            {% if address.status == True %}
+            <small>Verified Address <a href="#">Change</a></small>
+            {% else %}
+            <small>Unverified Address <a href="#">Change</a></small>
+            {% endif %}
+        </div>
+        <h2>Vendor Detais</h2>
+        <div>
+            <img src="{{product.vendor.image.url}}" alt="vendor" width="50" height="50">
+            <small>Name: {{product.vendor.title}}</small> <br>
+            <small>Contact: {{product.vendor.contact}}</small> <br>
+            <small>Address:{{product.vendor.address}}</small> <br>
+            <small>Date Return: {{product.vendor.days_return}}%</small> <br>
+            <small>Wrranty Period: {{product.vendor.warranty_period}} days</small> <br>
+            <small>Shipping On Time: {{product.vendor.shipping_on_time}}%</small> <br>
+            <small>Authentic Rating: {{product.vendor.authentic_rating}}%</small> <br>
+            <small>Date Joined: {{product.vendor.date|date:"M Y"}}</small> <br>
+        </div>
+
     </div>
 {% endblock content %}
