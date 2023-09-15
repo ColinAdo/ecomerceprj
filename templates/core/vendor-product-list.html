@@ -13,6 +13,7 @@
     <div>
         <div>
             {% for product in products %}
+            <a href="{% url 'product-details' product.pid %}">
                 <div><div>-{{product.get_percentage|floatformat:0}}%</div>
                     <div><img src="{{ product.image.url }}" alt="image" width="100" height="100"></div>
                     <div>
@@ -23,6 +24,7 @@
                         
                     </div>
                 </div>
+            </a>
             {% endfor %}
         </div>
     </div>
