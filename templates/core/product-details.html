@@ -52,5 +52,25 @@
             <small>Date Joined: {{product.vendor.date|date:"M Y"}}</small> <br>
         </div>
 
+        {% if products %}
+        <h2>Related Products</h2>
+        {% endif %}
+        <div>
+            {% for product in products %}
+            <a href="{% url 'product-details' product.pid %}">
+                <div><div>-{{product.get_percentage|floatformat:0}}%</div>
+                    <div><img src="{{ product.image.url }}" alt="image" width="100" height="100"></div>
+                    <div>
+                        <small>by {{product.vendor.title}}</small> <br>
+                        <small>{{product.title}}</small>
+                        <small>{{product.price}}</small>
+                        <small><del >{{product.old_price}}</del></small>
+                        
+                    </div>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+
     </div>
 {% endblock content %}

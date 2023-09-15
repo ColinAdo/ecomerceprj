@@ -60,11 +60,15 @@ def vendor_product_list(request, vid):
 def product_details(request, pid):
     template = 'core/product-details.html'
     product = Product.objects.get(pid=pid)
+    products = Product.objects.filter(
+        category=product.category, featured=product.featured, product_status=product.product_status
+        ).exclude(pid=pid)
 
     p_images = product.p_images.all()
 
     context = {
         'product': product,
-        'p_images': p_images
+        'p_images': p_images,
+        'products': products
     }
     return render(request, template, context)
