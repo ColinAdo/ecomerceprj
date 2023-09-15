@@ -13,7 +13,7 @@ def index(request):
 
 def product_list(request):
     template = 'core/product_list.html'
-    products = Product.objects.all().order_by('-date')
+    products = Product.objects.filter(featured=True, product_status='published').order_by('-date')
     context = {
         'products': products
     }
@@ -54,5 +54,17 @@ def vendor_product_list(request, vid):
     context = {
         'vendor': vendor,
         'products': products
+    }
+    return render(request, template, context)
+
+def product_details(request, pid):
+    template = 'core/product-details.html'
+    product = Product.objects.get(pid=pid)
+
+    p_images = product.p_images.all()
+
+    context = {
+        'product': product,
+        'p_images': p_images
     }
     return render(request, template, context)

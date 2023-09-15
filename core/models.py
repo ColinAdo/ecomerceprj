@@ -88,6 +88,11 @@ class Product(models.Model):
     specification = models.TextField(null=True, blank=True)
     product_status = models.CharField(max_length=30, choices=STATUS)
 
+    type = models.CharField(max_length=200, default='organic', null=True, blank=True)
+    mfd = models.DateTimeField(auto_now_add=False, null=True, blank=True)
+    expair = models.IntegerField(default=150, null=True, blank=True)
+    number_in_stock = models.IntegerField(default=100, null=True, blank=True)
+
     status = models.BooleanField(default=True)
     in_stock = models.BooleanField(default=True)
     featured = models.BooleanField(default=False)
@@ -112,7 +117,7 @@ class Product(models.Model):
     
 class ProductImages(models.Model):
     image = models.ImageField(upload_to="product-images", default="product.png")
-    product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True, blank=True)
+    product = models.ForeignKey(Product,related_name='p_images', on_delete=models.SET_NULL, null=True, blank=True)
     date = models.DateTimeField(auto_now_add=True)
 
     class Meta:

@@ -1,0 +1,30 @@
+{% extends 'partials/base.html' %}
+{% block title %} Product List {% endblock title %}
+
+{% block content %}
+    
+    <h2>Product Details</h2>
+
+    <div>
+        <div>
+                <div><div>-{{product.get_percentage|floatformat:0}}% off</div>
+                    <div><img src="{{ product.image.url }}" alt="image" width="100" height="100"></div>
+                    <div>
+                        <small>by {{product.vendor.title}}</small> <br>
+                        <small>{{product.title}}</small> <br>
+                        <small>Type: {{product.type}}</small> <br>
+                        <small>Mfd: {{product.mfd}}</small> <br>
+                        <small>Expaires After: {{product.expair}} days</small> <br>
+                        <small>{{product.number_in_stock}} Remained</small> <br>
+                        <small>{{product.price}}</small>
+                        <small><del >{{product.old_price}}</del></small>
+                        
+                    </div>
+                </div>
+        </div>
+        <!-- TODO thumbnail to be displayed using js -->
+        {% for p_image in p_images %}
+        <div class="thumbnail"><img src="{{p_image.image.url}}" alt="product-details" width="50" height="50"></div>
+        {% endfor %}
+    </div>
+{% endblock content %}
