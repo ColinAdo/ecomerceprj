@@ -1,0 +1,25 @@
+{% extends 'partials/base.html' %}
+{% block title %} Product List {% endblock title %}
+
+{% block content %}
+    <h2>#{{tags.name}}</h2>
+
+    <div>
+        <div>
+            {% for product in products %}
+            <a href="{% url 'product-details' product.pid %}">
+                <div><div>-{{product.get_percentage|floatformat:0}}%</div>
+                    <div><img src="{{ product.image.url }}" alt="image" width="100" height="100"></div>
+                    <div>
+                        <small>by {{product.vendor.title}}</small> <br>
+                        <small>{{product.title}}</small>
+                        <small>{{product.price}}</small>
+                        <small><del >{{product.old_price}}</del></small>
+                        
+                    </div>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock content %}

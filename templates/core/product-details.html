@@ -18,7 +18,10 @@
                         <small>{{product.number_in_stock}} Remained</small> <br>
                         <small>{{product.description|truncatechars:30}}</small> <br>
                         <small>{{product.price}}</small>
-                        <small><del >{{product.old_price}}</del></small>
+                        <small><del >{{product.old_price}}</del></small> <br>
+                        {% for tag in product.tags.all %}
+                            <a href="{% url 'tags' tag.slug %}">{{tag.name}}</a>
+                        {% endfor %}
                         
                     </div>
                 </div>

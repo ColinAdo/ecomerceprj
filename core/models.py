@@ -2,6 +2,7 @@ from django.db import models
 from django.utils.html import mark_safe
 from shortuuid.django_fields import ShortUUIDField
 from userauths.models import CustomUser
+from taggit.managers import TaggableManager
 
 def user_directory_path(instance, filename):
     return "{0}/{1}".format(instance.user.id, filename)
@@ -75,7 +76,6 @@ class Tags(models.Model):
 class Product(models.Model):
     pid = ShortUUIDField(unique=True, length=10, max_length=20, prefix="prd", alphabet="ewifghjk123456")
 
-    # tags = models.ForeignKey(Tags, on_delete=models.SET_NULL, null=True, blank=True)
     user = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, null=True)
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, related_name='category')
     vendor = models.ForeignKey(Vendor, on_delete=models.SET_NULL, null=True, related_name='vendor')
@@ -88,6 +88,8 @@ class Product(models.Model):
     specification = models.TextField(null=True, blank=True)
     product_status = models.CharField(max_length=30, choices=STATUS)
 
+    tags = TaggableManager(blank=True)
+
     type = models.CharField(max_length=200, default='organic', null=True, blank=True)
     mfd = models.DateTimeField(auto_now_add=False, null=True, blank=True)
     expair = models.IntegerField(default=150, null=True, blank=True)
@@ -98,7 +100,7 @@ class Product(models.Model):
     featured = models.BooleanField(default=False)
     digital = models.BooleanField(default=False)
 
-    date = models.DateTimeField(auto_now_add=True)
+    date = models.DateTimeField(auto_now_add=False, null=True, blank=True)
     update = models.DateTimeField(null=True, blank=True)
     
     

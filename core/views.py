@@ -1,10 +1,10 @@
 from django.shortcuts import render
 from .models import Product, Category, Vendor, CartOrder, CardOrderItem, ProductImages, ProductReview, Wishlist, Address
-
+from taggit.models import Tag
 
 def index(request):
     template = 'core/index.html'
-    products = Product.objects.filter(product_status='published', featured=True)
+    products = Product.objects.filter(product_status='published', featured=True).order_by('-date')
 
     context = {
         'products': products
@@ -70,5 +70,20 @@ def product_details(request, pid):
         'product': product,
         'p_images': p_images,
         'products': products
+    }
+    return render(request, template, context)
+
+def tags(request, tag_slug=None):
+    template = 'core/tags.html'
+
+    products = Product.objects.filter(featured=True, product_status='published').order_by('-date')
+
+    tags = None
+    if tag_slug:
+        tags = Tag.objects.get(slug= tag_slug)
+        products = products.filter(tags__in=[tags]).order_by('-date')
+    context = {
+        'products': products,
+        'tags': tags,
     }
     return render(request, template, context)
