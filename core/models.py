@@ -2,7 +2,9 @@ from django.db import models
 from django.utils.html import mark_safe
 from shortuuid.django_fields import ShortUUIDField
 from userauths.models import CustomUser
+
 from taggit.managers import TaggableManager
+from ckeditor_uploader.fields import RichTextUploadingField
 
 def user_directory_path(instance, filename):
     return "{0}/{1}".format(instance.user.id, filename)
@@ -49,7 +51,7 @@ class Vendor(models.Model):
     vid = ShortUUIDField(unique=True, length=10, max_length=20, prefix="ven" , alphabet="abcdefkx123456")
     title = models.CharField(max_length=200)
     image = models.ImageField(upload_to=user_directory_path, default='venders.png')
-    description = models.TextField(null=True, blank=True)
+    description = RichTextUploadingField(null=True, blank=True)
     contact = models.CharField(max_length=100, default='(+254) 123 456 678')
     address = models.CharField(max_length=100, default='P.0 Box Nairobi')
     warranty_period = models.CharField(max_length=100, default='100')
@@ -82,10 +84,10 @@ class Product(models.Model):
 
     title = models.CharField(max_length=200)
     image = models.ImageField(upload_to=user_directory_path, default='product.png')
-    description = models.TextField(null=True, blank=True)
+    description = RichTextUploadingField(null=True, blank=True)
     price = models.DecimalField(max_digits=999999999999999999 , decimal_places=2, default=1.99)
     old_price = models.DecimalField(max_digits=999999999999999999 , decimal_places=2, default=2.99)
-    specification = models.TextField(null=True, blank=True)
+    specification = RichTextUploadingField(null=True, blank=True)
     product_status = models.CharField(max_length=30, choices=STATUS)
 
     tags = TaggableManager(blank=True)

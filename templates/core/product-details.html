@@ -16,13 +16,19 @@
                         <small>Mfd: {{product.mfd}}</small> <br>
                         <small>Expaires After: {{product.expair}} days</small> <br>
                         <small>{{product.number_in_stock}} Remained</small> <br>
-                        <small>{{product.description|truncatechars:30}}</small> <br>
-                        <small>{{product.price}}</small>
+                        <small>Price: {{product.price}}</small> <br>
                         <small><del >{{product.old_price}}</del></small> <br>
+                        
                         {% for tag in product.tags.all %}
                             <a href="{% url 'tags' tag.slug %}">{{tag.name}}</a>
                         {% endfor %}
-                        
+                        <!-- The full description and specification of the products goes here...... -->
+                        <div>
+                            <a href="#">Description</a>
+                            <small>{{product.description|safe}}</small>
+                            <a href="#">Specification</a>
+                            <small>{{product.specification|safe}}</small>
+                        </div>
                     </div>
                 </div>
         </div>
@@ -31,7 +37,7 @@
         <div class="thumbnail"><img src="{{p_image.image.url}}" alt="product-details" width="50" height="50"></div>
         {% endfor %}
 
-        <!-- The full description and specification of the products goes here...... -->
+        <hr>
 
         <h2>Your Address</h2>
         <div>
@@ -42,6 +48,7 @@
             <small>Unverified Address <a href="#">Change</a></small>
             {% endif %}
         </div>
+        <hr>
         <h2>Vendor Detais</h2>
         <div>
             <img src="{{product.vendor.image.url}}" alt="vendor" width="50" height="50">
@@ -54,6 +61,7 @@
             <small>Authentic Rating: {{product.vendor.authentic_rating}}%</small> <br>
             <small>Date Joined: {{product.vendor.date|date:"M Y"}}</small> <br>
         </div>
+        <hr>
 
         {% if products %}
         <h2>Related Products</h2>

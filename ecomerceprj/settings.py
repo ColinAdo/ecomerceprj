@@ -41,6 +41,7 @@ INSTALLED_APPS = [
 
     # libraries
     'taggit',
+    'ckeditor',
 
     # Custom apps
     'core.apps.CoreConfig',
@@ -136,3 +137,18 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'userauths.CustomUser'
+
+CKEDITOR_UPLOAD_PATH = "uploads/"
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        'skin': 'moono',
+        'toobar': 'full',
+        'extraPlugins': ','.join(
+            [
+                'widget',
+                'dialog',
+            ]
+        ),
+    }
+}
