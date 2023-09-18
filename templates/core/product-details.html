@@ -28,6 +28,45 @@
                             <small>{{product.description|safe}}</small>
                             <a href="#">Specification</a>
                             <small>{{product.specification|safe}}</small>
+                            <a href="#">Reviews ({{reviews.count}})</a>
+                            {% for review in reviews %}
+                            <div>
+                                <img src="#" alt="Profile Image">
+                                <small>{{review.user.username|title}}</small>
+                                <small>{{review.date|date:"d M Y"}}</small>
+                                {% if review.rating == 5 %}
+                                <small>⭐⭐⭐⭐⭐ {{review.rating|floatformat:1}} out of 5.0</small>
+                                {% elif review.rating == 4  %}
+                                <small>⭐⭐⭐⭐★ {{review.rating|floatformat:1}} out of 5.0</small>
+                                {% elif review.rating == 3 %}
+                                <small>⭐⭐⭐★★ {{review.rating|floatformat:1}} out of 5.0</small>
+                                {% elif review.rating == 2 %}
+                                <small>⭐⭐★★★ {{review.rating|floatformat:1}} out of 5.0</small>
+                                {% else %}
+                                <small>⭐★★★★ {{review.rating|floatformat:1}} out of 5.0</small>
+                                {% endif %} <br>
+                                <small>{{review.review}}</small>
+
+                            </div>
+                            {% endfor%}
+                            <div>
+                                <h2>Average</h2>
+                                {% if five_reviews %}
+                                5 stars  <small>{{percentage_five|floatformat:0}}%</small> <br>
+                                {% endif %}
+                                {% if four_reviews %}
+                                4 stars  <small>{{percentage_four|floatformat:0}}%</small><br>
+                                {% endif %}
+                                {% if three_reviews %}
+                                3 stars  <small>{{percentage_three|floatformat:0}}%</small><br>
+                                {% endif %}
+                                {% if two_reviews %}
+                                2 stars  <small>{{percentage_two|floatformat:0}}%</small><br>
+                                {% endif %}
+                                {% if  one_review %}
+                                1 star  <small>{{percentage_one|floatformat:0}}%</small>
+                                {% endif %}
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -65,11 +65,52 @@ def product_details(request, pid):
         ).exclude(pid=pid)
 
     p_images = product.p_images.all()
+    
+    reviews = None
+    five_reviews = None
+    four_reviews = None
+    three_reviews = None
+    two_reviews = None
+    one_review = None
+    total_reviews = None
+    percentage_five = None
+    percentage_four = None
+    percentage_three = None
+    percentage_two = None
+    percentage_one = None
+    try:
+        reviews = ProductReview.objects.filter(product=product)
+        five_reviews = ProductReview.objects.filter(product=product, rating=5).count()
+        four_reviews = ProductReview.objects.filter(product=product, rating=4).count()
+        three_reviews = ProductReview.objects.filter(product=product, rating=3).count()
+        two_reviews = ProductReview.objects.filter(product=product, rating=2).count()
+        one_review = ProductReview.objects.filter(product=product, rating=1).count()
 
+        total_reviews = reviews.count()
+
+        percentage_five = (five_reviews / total_reviews) * 100
+        percentage_four = (four_reviews / total_reviews) * 100
+        percentage_three = (three_reviews / total_reviews) * 100
+        percentage_two = (two_reviews / total_reviews) * 100
+        percentage_one = (one_review / total_reviews) * 100
+    except:
+        pass
+   
     context = {
+        'percentage_five': percentage_five,
+        'percentage_four': percentage_four,
+        'percentage_three': percentage_three,
+        'percentage_two': percentage_two,
+        'percentage_one': percentage_one,
         'product': product,
         'p_images': p_images,
-        'products': products
+        'products': products,
+        'reviews': reviews,
+        'five_reviews':five_reviews,
+        'four_reviews': four_reviews,
+        'three_reviews': three_reviews,
+        'two_reviews': two_reviews,
+        'one_review': one_review
     }
     return render(request, template, context)
 
