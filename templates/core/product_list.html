@@ -2,13 +2,8 @@
 {% block title %} Product List {% endblock title %}
 
 {% block content %}
-    {% if messages %}
-        {% for message in messages %}
-            {{message}}
-        {% endfor %}
-    {% endif %}
     
-    <h2>All Products</h2>
+    <h2>All Product{{products.count|pluralize}} ({{products.count}})</h2>
 
     <div>
         <div>

@@ -1,0 +1,70 @@
+{% extends 'partials/base.html' %}
+{% block title %} Product List {% endblock title %}
+
+{% block content %}
+    {% if query %}
+    <h2>Results for {{query}}</h2>
+    {% else %}
+    <h2>No searched item</h2>
+    {% endif %}
+    {% if products %}
+    <h3>Product{{products.count|pluralize}} ({{products.count}})</h3>
+    {% endif %}
+<!-- poducts -->
+    <div>
+        <div>
+            {% for product in products %}
+            <a href="{% url 'product-details' product.pid %}">
+                <div><div>-{{product.get_percentage|floatformat:0}}%</div>
+                    <div><img src="{{ product.image.url }}" alt="image" width="100" height="100"></div>
+                    <div>
+                        <small>by {{product.vendor.title}}</small> <br>
+                        <small>{{product.title}}</small>
+                        <small>{{product.price}}</small>
+                        <small><del >{{product.old_price}}</del></small>
+                        
+                    </div>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+
+<!-- vendors -->
+<div>
+    {% if vendors %}
+        <h3>Vendor{{vendors.count|pluralize}} ({{vendors.count}})</h3>
+    {% endif %}
+        {% for vendor in vendors %}
+        <a href="{% url 'vendor-products'  vendor.vid %}">
+            <div><img src="{{vendor.image.url}}" alt="vendor" width="100" height="100"></div>
+            <div>Name: {{vendor.title}}</div>
+            <div>Rating: {{vendor.authentic_rating}}</div>
+            <div>Warranty Period: {{vendor.warranty_period}}</div>
+            <div>Shipping On Time: {{vendor.shipping_on_time}}</div>
+            <div>Conatact: {{vendor.contact}}</div>
+            <div>Address: {{vendor.address}}</div>
+            <div>Since {{vendor.date|date:"M Y"}}</div>
+            <div>{{vendor.vendor.count}} Product{{vendor.vendor.count|pluralize}}</div>
+            {% endfor %}
+        </a>
+    </div>
+
+<!-- categories -->
+<div>
+    {% if categories %}
+        <h3>Category{{categories.count|pluralize}} ({{categories.count}})</h3>
+    {% endif %}
+    {% for category in categories %}
+    <a href="{% url 'category-products' category.cid %}">
+        <div>
+            <div><img src="{{ category.image.url }}" alt="image" width="100" height="100"></div>
+            <div>
+                <small>{{category.title}}</small> <br>
+                <small>{{category.category.count}} Product{{category.category.count|pluralize}}</small> 
+            </div>
+        </div>
+    </a>
+    {% endfor %}
+</div>
+{% endblock content %}

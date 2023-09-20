@@ -20,7 +20,9 @@ urlpatterns = [
     # Tags
     path('product/tags/<slug:tag_slug>', views.tags, name='tags'),
 
+    # Ajax 
     path('ajax_review/<str:pid>', views.ajax_review_view, name='ajax_review'),
 
-
+    # search 
+    path('search/', views.search, name='search')
 ]

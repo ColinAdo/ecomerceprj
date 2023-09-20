@@ -5,5 +5,12 @@
         <li><a href="{% url 'category' %}">Categories</a></li>
         <li><a href="{% url 'vendor' %}">Vendors</a></li>
         <li><a href="{% url 'signout' %}">Logout</a></li>
+        <form action="{% url 'search' %}" method="GET">
+        <div>
+            <input type="text" name="q">
+            <button type="submit">Search</button>
+        </div>
+        </form>
+        
     </ul>
 </div>

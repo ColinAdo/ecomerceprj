@@ -160,3 +160,19 @@ def ajax_review_view(request, pid):
             
         }
     )
+
+def search(request):
+    template = 'core/search.html'
+    query = request.GET.get('q')
+    products = Product.objects.filter(title__icontains=query).order_by('-date')
+    vendors = Vendor.objects.filter(title__icontains=query).order_by('-date')
+    categories = Category.objects.filter(title__icontains=query).order_by('-date')
+    
+    context = {
+        'products': products,
+        'vendors': vendors,
+        'categories': categories,
+        'query': query,
+    }
+
+    return render(request, template, context)

@@ -36,6 +36,7 @@ class Category(models.Model):
     cid = ShortUUIDField(unique=True, length=10, max_length=20, prefix='catrg', alphabet="abcdefkx123456")
     title = models.CharField(max_length=200, default="Food")
     image = models.ImageField(upload_to='category', default='category.jpg')
+    date = models.DateTimeField(auto_now_add=True, null=True, blank=True)
 
     class Meta:
         verbose_name_plural = 'categories'
